@@ -1,0 +1,48 @@
+<html>
+<head>
+</head>
+
+
+Welcome to BirdBox Sports. The New Age Home for all Boxing Enthusiasts!
+
+
+Look at the preview below for a glance at our Top 50 Pound-for-Pound rankings!
+
+
+
+</body>
+<h1>BirdBox Sports</h1>
+<h2>Home Page</h2>
+
+<?php
+global $mysqli;
+$host = "localhost";
+$username = "root";
+$user_pass = "usbw";
+$database_in_use = "test";
+
+$mysqli = new mysqli("$host", "$username", "$user_pass", "$database_in_use");
+
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+echo $mysqli->host_info . "\n";
+
+
+$sql = "SELECT Rank, Name, Points, Division, Age, Record, Stance, Residence FROM topboxers";
+$result = $mysqli->query($sql);
+
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "Rank id: " . $row["Rank"]. "- Name: " . $row["Name"]. " " . $row["Points"]. " " . $row["Division"]. " " . $row["Age"]. " " . $row["Record"]. " " . $row["Stance"]. " " . $row["Residence"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+$mysqli->close();
+
+?>
+
+</html>
